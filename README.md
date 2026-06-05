@@ -231,3 +231,40 @@ The resulting p-value was **0.5070**.
 Since the p-value is greater than the significance level of 0.05, I fail to reject the null hypothesis.
 
 This suggests that there is not sufficient evidence to conclude that simple and complex recipes have different average ratings. Recipe complexity, measured by number of preparation steps, does not appear to have a strong association with user ratings in this dataset.
+
+---
+
+# Framing a Prediction Problem
+
+The prediction problem I chose is:
+
+**Can we predict the average user rating of a recipe using information about the recipe when it is first posted?**
+
+This is a **regression problem** because the response variable, `avg_rating`, is a continuous numerical value ranging from 1 to 5.
+
+## Response Variable
+
+The response variable is `avg_rating`, which represents the average user rating received by each recipe.
+
+I chose this variable because average rating serves as a measure of user satisfaction, which directly relates to my overall goal of understanding how recipe characteristics influence how users perceive recipes.
+
+## Features Available at Time of Prediction
+
+At the time of prediction, the model would only have access to information available when a recipe is first posted, before users rate or review it.
+
+Examples of usable features include:
+
+- `n_steps`: number of preparation steps
+- `n_ingredients`: number of ingredients required
+- `minutes`: preparation and cooking time
+- extracted nutritional information
+
+I will not use features such as individual user ratings or written reviews because these are generated after users interact with the recipe. Including these features would introduce data leakage because they would not be available when predicting the rating of a new recipe.
+
+## Evaluation Metric
+
+I will evaluate my model using **Root Mean Squared Error (RMSE)**.
+
+RMSE measures the average prediction error in rating points, making it easy to interpret because it uses the same units as the response variable.
+
+I chose RMSE over other metrics such as Mean Absolute Error (MAE) because RMSE penalizes larger prediction errors more heavily. In this context, predicting a recipe's rating very incorrectly is more problematic than making several small prediction errors.
