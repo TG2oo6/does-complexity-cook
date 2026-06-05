@@ -181,3 +181,53 @@ I also tested whether the missingness of `review` depends on the recipe's `ratin
 The observed difference in mean rating between recipes with missing and non-missing reviews was **0.1243**. After 1000 permutations, the resulting p-value was **0.7590**.
 
 Since the p-value is much greater than 0.05, I fail to reject the null hypothesis. This suggests that the missingness of `review` does not depend on the user's rating.
+
+---
+
+# Hypothesis Testing
+
+To further investigate whether recipe complexity is associated with user ratings, I performed a permutation test comparing simple and complex recipes.
+
+Recipes were separated into two groups:
+
+- **Simple recipes:** recipes with 10 or fewer preparation steps
+- **Complex recipes:** recipes with more than 10 preparation steps
+
+## Hypotheses
+
+**Null Hypothesis:**  
+The distribution of average ratings for simple recipes and complex recipes is the same. Any observed difference in mean ratings is due to random chance.
+
+**Alternative Hypothesis:**  
+The distribution of average ratings for simple recipes and complex recipes is different.
+
+## Test Statistic
+
+I used the difference in group means as my test statistic:
+
+**Mean rating of complex recipes − mean rating of simple recipes**
+
+This statistic was chosen because the question focuses on whether recipe complexity is associated with higher or lower user ratings, and the average rating provides a direct measure of user satisfaction.
+
+The significance level used was **0.05**.
+
+The observed results were:
+
+- Simple recipes mean rating: **4.6242**
+- Complex recipes mean rating: **4.6273**
+- Observed difference: **0.0031**
+
+A permutation test with 1000 simulations was performed.
+
+<iframe
+  src="proj04/assets/hypothesis_test.html"
+  width="800"
+  height="600"
+  frameborder="0">
+</iframe>
+
+The resulting p-value was **0.5070**.
+
+Since the p-value is greater than the significance level of 0.05, I fail to reject the null hypothesis.
+
+This suggests that there is not sufficient evidence to conclude that simple and complex recipes have different average ratings. Recipe complexity, measured by number of preparation steps, does not appear to have a strong association with user ratings in this dataset.
