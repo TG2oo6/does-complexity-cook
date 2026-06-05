@@ -268,3 +268,36 @@ I will evaluate my model using **Root Mean Squared Error (RMSE)**.
 RMSE measures the average prediction error in rating points, making it easy to interpret because it uses the same units as the response variable.
 
 I chose RMSE over other metrics such as Mean Absolute Error (MAE) because RMSE penalizes larger prediction errors more heavily. In this context, predicting a recipe's rating very incorrectly is more problematic than making several small prediction errors.
+
+---
+
+# Baseline Model
+
+For my baseline model, I trained a multiple linear regression model to predict the average rating (`avg_rating`) of a recipe.
+
+The model uses two features:
+
+- `n_steps` (**quantitative**): the number of preparation steps in the recipe
+- `n_ingredients` (**quantitative**): the number of ingredients used in the recipe
+
+The model contains 2 quantitative features, 0 ordinal features, and 0 nominal features. Since there are no categorical features in this baseline model, no one-hot encoding or ordinal encoding was necessary.
+
+I used an `sklearn` Pipeline containing:
+
+1. `StandardScaler` to standardize the numerical features
+2. `LinearRegression` to fit the prediction model
+
+The dataset was split into training and testing sets, and model performance was evaluated using Root Mean Squared Error (RMSE). RMSE was chosen because it measures the average prediction error in the same units as the response variable (stars), while also penalizing larger prediction mistakes more heavily.
+
+The baseline model achieved:
+
+| Dataset | RMSE |
+| --- | --- |
+| Training Set | 0.6419 |
+| Test Set | 0.6360 |
+
+The training and testing RMSE values are very similar, suggesting that the model is not overfitting and generalizes similarly to unseen data.
+
+However, a test RMSE of approximately 0.64 on a 1–5 star rating scale indicates that the model has limited predictive ability. This suggests that recipe complexity features such as `n_steps` and `n_ingredients` alone do not explain much variation in user ratings.
+
+I do not consider this baseline model to be a strong model because it only uses two simple recipe complexity features. In the final model, I will include additional recipe information and perform more feature engineering to improve prediction performance.
