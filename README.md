@@ -132,3 +132,52 @@ To further examine the relationship between complexity and rating, I grouped rec
 | 20+ | 4.647305 |
 
 Average ratings remain very similar across all step complexity groups, ranging from approximately 4.62 to 4.65 stars. This suggests that recipe complexity alone does not strongly determine user satisfaction, motivating further hypothesis testing.
+
+---
+
+# Assessment of Missingness
+
+## NMAR Analysis
+
+I believe the missingness of the `review` column could be NMAR (Not Missing At Random). Users who choose not to leave a written review may differ from users who write reviews in ways that are not directly captured by the dataset. For example, users may only leave a rating without a review because they are less motivated to explain their opinion or have lower engagement with the recipe.
+
+To determine whether the missingness is truly NMAR, additional information such as user engagement, time spent viewing the recipe page, or whether the user usually writes detailed reviews would be needed.
+
+---
+
+## Missingness Dependency
+
+I analyzed the missingness of the `review` column by performing permutation tests to determine whether the missingness depends on other columns in the dataset.
+
+### Dependency on Preparation Time
+
+First, I tested whether the missingness of `review` depends on `minutes`, the preparation time of a recipe.
+
+**Null Hypothesis:** The distribution of `minutes` is the same for recipes with missing and non-missing reviews.
+
+**Alternative Hypothesis:** The distribution of `minutes` differs between recipes with missing and non-missing reviews.
+
+The observed difference in mean preparation time between recipes with missing and non-missing reviews was **246.0984 minutes**. After 1000 permutations, the resulting p-value was **0.0350**.
+
+<iframe
+  src="assets/missingness_minutes_test.html"
+  width="800"
+  height="600"
+  frameborder="0">
+</iframe>
+
+Since the p-value is below the significance level of 0.05, I reject the null hypothesis. This suggests that the missingness of `review` depends on `minutes`, meaning recipe preparation time may be related to whether users choose to leave written feedback.
+
+---
+
+### Dependency on Rating
+
+I also tested whether the missingness of `review` depends on the recipe's `rating`.
+
+**Null Hypothesis:** The distribution of ratings is the same for recipes with missing and non-missing reviews.
+
+**Alternative Hypothesis:** The distribution of ratings differs between recipes with missing and non-missing reviews.
+
+The observed difference in mean rating between recipes with missing and non-missing reviews was **0.1243**. After 1000 permutations, the resulting p-value was **0.7590**.
+
+Since the p-value is much greater than 0.05, I fail to reject the null hypothesis. This suggests that the missingness of `review` does not depend on the user's rating.
