@@ -301,3 +301,54 @@ The training and testing RMSE values are very similar, suggesting that the model
 However, a test RMSE of approximately 0.64 on a 1–5 star rating scale indicates that the model has limited predictive ability. This suggests that recipe complexity features such as `n_steps` and `n_ingredients` alone do not explain much variation in user ratings.
 
 I do not consider this baseline model to be a strong model because it only uses two simple recipe complexity features. In the final model, I will include additional recipe information and perform more feature engineering to improve prediction performance.
+
+---
+
+# Final Model
+
+For my final model, I used a `RandomForestRegressor` to predict `avg_rating`. I chose this model because random forests can capture nonlinear relationships between recipe characteristics and average rating, which a linear regression model may miss.
+
+## Feature Engineering
+
+Compared to the baseline model, I added two new features:
+
+| Feature | Type | Description |
+| --- | --- | --- |
+| `calories` | Quantitative | Extracted from the `nutrition` column. Recipes with different calorie levels may represent different types of dishes, which could be related to user ratings. |
+| `log_minutes` | Quantitative | A log-transformed version of `minutes`. Cooking time is heavily right-skewed, so this transformation reduces the impact of extremely long cooking times. |
+
+I also kept the baseline features `n_steps` and `n_ingredients`. Since `n_steps` was right-skewed, I applied a `QuantileTransformer` to make its distribution more uniform before fitting the model.
+
+## Modeling Algorithm and Hyperparameter Tuning
+
+The final model used a pipeline with:
+
+1. A `ColumnTransformer` for preprocessing
+2. A `RandomForestRegressor` for prediction
+
+I used `GridSearchCV` with 3-fold cross-validation to search over the following hyperparameters:
+
+| Hyperparameter | Values Tested | Reason |
+| --- | --- | --- |
+| `n_estimators` | 50, 100 | Controls the number of trees in the random forest |
+| `max_depth` | 5, 10, None | Controls the depth of each tree and helps manage overfitting |
+
+The best hyperparameters were:
+
+- `max_depth = 5`
+- `n_estimators = 100`
+
+## Final Model Performance
+
+The final model achieved:
+
+| Model | Train RMSE | Test RMSE |
+| --- | --- | --- |
+| Baseline Model | 0.6419 | 0.6360 |
+| Final Model | 0.6392 | 0.6353 |
+
+The final model improved the test RMSE by about **0.0007** compared to the baseline model.
+
+This improvement is very small, suggesting that recipe characteristics such as steps, ingredients, calories, and cooking time are weak predictors of average recipe rating. This is consistent with the earlier exploratory analysis and hypothesis test, where recipe complexity did not show a strong relationship with average rating.
+
+The final model still appears to generalize reasonably well because the training and testing RMSE values are close. However, the overall predictive performance remains limited, suggesting that average recipe ratings may depend on factors not captured by these recipe-level features.
