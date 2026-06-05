@@ -1,5 +1,6 @@
 # Does Complexity Cook? 
 By Thalesh Gupta
+
 A data science project for DSC 80 at UCSD exploring whether recipe complexity affects user ratings on Food.com.
 
 ---
@@ -56,8 +57,13 @@ To prepare the dataset for analysis, I performed several cleaning steps:
 
 The first few rows of the cleaned dataset are shown below:
 
-[INSERT YOUR CLEANED HEAD MARKDOWN TABLE HERE]
-
+| name | id | minutes | submitted | n_steps | n_ingredients | rating | avg_rating |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 brownies in the world best ever | 333281 | 40 | 2008-10-27 | 10 | 9 | 4.0 | 4.0 |
+| 1 in canada chocolate chip cookies | 453467 | 45 | 2011-04-11 | 12 | 11 | 5.0 | 5.0 |
+| 412 broccoli casserole | 306168 | 40 | 2008-05-30 | 6 | 9 | 5.0 | 5.0 |
+| millionaire pound cake | 286009 | 120 | 2008-02-12 | 7 | 7 | 5.0 | 5.0 |
+| 2000 meatloaf | 475785 | 90 | 2012-03-06 | 17 | 13 | 5.0 | 5.0 |
 
 ---
 
@@ -66,7 +72,7 @@ The first few rows of the cleaned dataset are shown below:
 The distribution below shows the number of preparation steps across recipes.
 
 <iframe
-  src="assets/steps_distribution.html"
+  src="proj04/assets/steps_distribution.html"
   width="800"
   height="600"
   frameborder="0">
@@ -74,6 +80,16 @@ The distribution below shows the number of preparation steps across recipes.
 
 The distribution of `n_steps` is right-skewed, with most recipes containing between 5–15 preparation steps. Very few recipes contain more than 40 steps, suggesting that most Food.com recipes are relatively straightforward.
 
+The distribution of average recipe ratings is also shown below.
+
+<iframe
+  src="proj04/assets/rating_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0">
+</iframe>
+
+The distribution of average ratings is heavily left-skewed, with most recipes receiving ratings between 4 and 5 stars. This suggests that Food.com ratings are generally high, possibly because users are more likely to rate recipes they enjoyed.
 
 ---
 
@@ -82,7 +98,7 @@ The distribution of `n_steps` is right-skewed, with most recipes containing betw
 The following plot compares recipe complexity (number of steps) with average user rating.
 
 <iframe
-  src="assets/steps_vs_rating.html"
+  src="proj04/assets/steps_vs_rating.html"
   width="800"
   height="600"
   frameborder="0">
@@ -90,6 +106,16 @@ The following plot compares recipe complexity (number of steps) with average use
 
 There does not appear to be a strong linear relationship between the number of steps and average rating. Recipes of all complexity levels receive a wide range of ratings, suggesting that additional steps alone may not strongly influence user satisfaction.
 
+The relationship between number of ingredients and average rating is also shown below.
+
+<iframe
+  src="proj04/assets/ingredients_vs_rating.html"
+  width="800"
+  height="600"
+  frameborder="0">
+</iframe>
+
+Similarly, there is no strong relationship between ingredient count and average rating. Recipes with both few and many ingredients can receive high ratings.
 
 ---
 
