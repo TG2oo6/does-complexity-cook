@@ -57,13 +57,13 @@ To prepare the dataset for analysis, I performed several cleaning steps:
 
 The first few rows of the cleaned dataset are shown below:
 
-| name | id | minutes | submitted | n_steps | n_ingredients | rating | avg_rating |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 brownies in the world best ever | 333281 | 40 | 2008-10-27 | 10 | 9 | 4.0 | 4.0 |
-| 1 in canada chocolate chip cookies | 453467 | 45 | 2011-04-11 | 12 | 11 | 5.0 | 5.0 |
-| 412 broccoli casserole | 306168 | 40 | 2008-05-30 | 6 | 9 | 5.0 | 5.0 |
-| millionaire pound cake | 286009 | 120 | 2008-02-12 | 7 | 7 | 5.0 | 5.0 |
-| 2000 meatloaf | 475785 | 90 | 2012-03-06 | 17 | 13 | 5.0 | 5.0 |
+| name | minutes | n_steps | n_ingredients | avg_rating |
+| --- | --- | --- | --- | --- |
+| 1 brownies in the world best ever | 40 | 10 | 9 | 4.0 |
+| 1 in canada chocolate chip cookies | 45 | 12 | 11 | 5.0 |
+| 412 broccoli casserole | 40 | 6 | 9 | 5.0 |
+| millionaire pound cake | 120 | 7 | 7 | 5.0 |
+| 2000 meatloaf | 90 | 17 | 13 | 5.0 |
 
 ---
 
