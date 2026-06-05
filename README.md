@@ -160,7 +160,7 @@ First, I tested whether the missingness of `review` depends on `minutes`, the pr
 The observed difference in mean preparation time between recipes with missing and non-missing reviews was **246.0984 minutes**. After 1000 permutations, the resulting p-value was **0.0350**.
 
 <iframe
-  src="assets/missingness_minutes_test.html"
+  src="proj04/assets/missingness_minutes_test.html"
   width="800"
   height="600"
   frameborder="0">
