@@ -352,3 +352,50 @@ The final model improved the test RMSE by about **0.0007** compared to the basel
 This improvement is very small, suggesting that recipe characteristics such as steps, ingredients, calories, and cooking time are weak predictors of average recipe rating. This is consistent with the earlier exploratory analysis and hypothesis test, where recipe complexity did not show a strong relationship with average rating.
 
 The final model still appears to generalize reasonably well because the training and testing RMSE values are close. However, the overall predictive performance remains limited, suggesting that average recipe ratings may depend on factors not captured by these recipe-level features.
+
+---
+
+# Fairness Analysis
+
+For the fairness analysis, I evaluated whether the final model performs differently for simple recipes compared to complex recipes.
+
+- **Group X:** Simple recipes (`n_steps <= 10`)
+- **Group Y:** Complex recipes (`n_steps > 10`)
+
+Since this is a regression problem, I used **RMSE** as the evaluation metric.
+
+## Hypotheses
+
+**Null Hypothesis:**  
+The model is fair. The RMSE for simple recipes and complex recipes comes from the same distribution, and any observed difference is due to random chance.
+
+**Alternative Hypothesis:**  
+The model is unfair. There is a significant difference between the RMSE for simple recipes and complex recipes.
+
+## Test Statistic
+
+I used the difference in RMSE as the test statistic:
+
+**Complex Recipe RMSE − Simple Recipe RMSE**
+
+The observed results were:
+
+| Group | RMSE |
+| --- | --- |
+| Simple Recipes | 0.6234 |
+| Complex Recipes | 0.6543 |
+
+The observed difference was **0.0309**.
+
+<iframe
+  src="proj04/assets/fairness_test.html"
+  width="800"
+  height="600"
+  frameborder="0">
+</iframe>
+
+After 1000 permutations, the resulting p-value was **0.0600**.
+
+Since the p-value is greater than the significance level of 0.05, I fail to reject the null hypothesis. Although the model has slightly higher prediction error for complex recipes than simple recipes, this difference is not statistically significant.
+
+Therefore, I do not find evidence that the model is unfair with respect to recipe complexity. The model appears to have similar predictive performance across simple and complex recipes, though this conclusion is limited to the groups, features, dataset, and fairness definition used in this analysis.
