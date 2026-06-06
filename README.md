@@ -157,7 +157,7 @@ First, I tested whether the missingness of `review` depends on `minutes`, the pr
 
 **Alternative Hypothesis:** The distribution of `minutes` differs between recipes with missing and non-missing reviews.
 
-The observed difference in mean preparation time between recipes with missing and non-missing reviews was **246.0984 minutes**. After 1000 permutations, the resulting p-value was **0.0350**.
+The observed difference in mean preparation time between recipes with missing and non-missing reviews was **246.0984 minutes**. After 1000 permutations, the resulting p-value was **0.0130**.
 
 <iframe
   src="proj04/assets/missingness_minutes_test.html"
@@ -178,7 +178,7 @@ I also tested whether the missingness of `review` depends on the recipe's `ratin
 
 **Alternative Hypothesis:** The distribution of ratings differs between recipes with missing and non-missing reviews.
 
-The observed difference in mean rating between recipes with missing and non-missing reviews was **0.1243**. After 1000 permutations, the resulting p-value was **0.7590**.
+The observed difference in mean rating between recipes with missing and non-missing reviews was **0.1243**. After 1000 permutations, the resulting p-value was **0.6510**.
 
 Since the p-value is much greater than 0.05, I fail to reject the null hypothesis. This suggests that the missingness of `review` does not depend on the user's rating.
 
@@ -226,7 +226,7 @@ A permutation test with 1000 simulations was performed.
   frameborder="0">
 </iframe>
 
-The resulting p-value was **0.5070**.
+The resulting p-value was **0.5090**.
 
 Since the p-value is greater than the significance level of 0.05, I fail to reject the null hypothesis.
 
@@ -326,6 +326,8 @@ The final model used a pipeline with:
 1. A `ColumnTransformer` for preprocessing
 2. A `RandomForestRegressor` for prediction
 
+The final model was evaluated using the same training and testing split as the baseline model, allowing the RMSE values to be directly compared.
+
 I used `GridSearchCV` with 3-fold cross-validation to search over the following hyperparameters:
 
 | Hyperparameter | Values Tested | Reason |
@@ -347,9 +349,9 @@ The final model achieved:
 | Baseline Model | 0.6419 | 0.6360 |
 | Final Model | 0.6392 | 0.6353 |
 
-The final model improved the test RMSE by about **0.0007** compared to the baseline model.
+The final model reduced the test RMSE by about **0.0007** compared to the baseline model.
 
-This improvement is very small, suggesting that recipe characteristics such as steps, ingredients, calories, and cooking time are weak predictors of average recipe rating. This is consistent with the earlier exploratory analysis and hypothesis test, where recipe complexity did not show a strong relationship with average rating.
+This improvement is very small, suggesting that recipe characteristics such as `n_steps`, `n_ingredients`, `calories`, and `log_minutes` are weak predictors of average recipe rating. This is consistent with the earlier exploratory analysis and hypothesis test, where recipe complexity did not show a strong relationship with average rating.
 
 The final model still appears to generalize reasonably well because the training and testing RMSE values are close. However, the overall predictive performance remains limited, suggesting that average recipe ratings may depend on factors not captured by these recipe-level features.
 
@@ -367,10 +369,10 @@ Since this is a regression problem, I used **RMSE** as the evaluation metric.
 ## Hypotheses
 
 **Null Hypothesis:**  
-The model is fair. The RMSE for simple recipes and complex recipes comes from the same distribution, and any observed difference is due to random chance.
+The model performs similarly for simple and complex recipes. The RMSE difference between groups is due to random chance.
 
 **Alternative Hypothesis:**  
-The model is unfair. There is a significant difference between the RMSE for simple recipes and complex recipes.
+The model performs differently for simple and complex recipes. There is a significant difference between the RMSE for simple recipes and complex recipes.
 
 ## Test Statistic
 
@@ -394,7 +396,7 @@ The observed difference was **0.0309**.
   frameborder="0">
 </iframe>
 
-After 1000 permutations, the resulting p-value was **0.0600**.
+After 1000 permutations, the resulting p-value was **0.0660**.
 
 Since the p-value is greater than the significance level of 0.05, I fail to reject the null hypothesis. Although the model has slightly higher prediction error for complex recipes than simple recipes, this difference is not statistically significant.
 
