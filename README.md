@@ -401,3 +401,13 @@ After 1000 permutations, the resulting p-value was **0.0660**.
 Since the p-value is greater than the significance level of 0.05, I fail to reject the null hypothesis. Although the model has slightly higher prediction error for complex recipes than simple recipes, this difference is not statistically significant.
 
 Therefore, I do not find evidence that the model is unfair with respect to recipe complexity. The model appears to have similar predictive performance across simple and complex recipes, though this conclusion is limited to the groups, features, dataset, and fairness definition used in this analysis.
+
+## Conclusion
+
+In this project, I investigated whether recipe complexity, measured through characteristics such as `n_steps`, `n_ingredients`, cooking time, and calories, is related to average user ratings.
+
+The exploratory analysis and hypothesis test showed that more complex recipes do not receive significantly different ratings compared to simpler recipes. Although small differences appeared in the data, the permutation test produced a p-value of 0.5090, meaning there was not enough evidence to conclude that recipe complexity affects average rating.
+
+On the predictive side, both the baseline Linear Regression model and final Random Forest model showed that basic recipe characteristics have limited ability to predict ratings. The final model slightly reduced the test RMSE from 0.6360 to 0.6353, suggesting that factors not captured in these features, such as taste preferences, recipe quality, or review text, may better explain user ratings.
+
+The fairness analysis found no statistically significant difference in model performance between simple and complex recipes (p-value = 0.0660), suggesting that the model performed similarly across these two groups under the chosen fairness definition.
